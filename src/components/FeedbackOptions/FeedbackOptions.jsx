@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, List } from './FeedbackOption.styled';
+import { Button, List } from './FeedbackOptions.styled';
 
 export const FeedbackOptions = ({
   onGoodClick,
