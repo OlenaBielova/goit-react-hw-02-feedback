@@ -15,6 +15,8 @@ export class App extends React.Component {
     neutral: PropTypes.number,
     bad: PropTypes.number,
     title: PropTypes.string,
+    total: PropTypes.func,
+    positivePercentage: PropTypes.func,
   };
 
   state = {
@@ -42,21 +44,22 @@ export class App extends React.Component {
   };
 
   countTotalFeedback = () => {
-    const total = this.state.good + this.state.neutral + this.state.bad;
+    const { good, neutral, bad } = this.state;
+    const total = good + neutral + bad;
     return total;
   };
 
   countPositiveFeedbackPercentage = () => {
+    const { good } = this.state;
     let positive = 0;
-    if (this.state.good !== 0) {
-      positive = Math.round(
-        (this.state.good / this.countTotalFeedback()) * 100
-      );
+    if (good !== 0) {
+      positive = Math.round((good / this.countTotalFeedback()) * 100);
     }
     return positive;
   };
 
   render() {
+    const { good, neutral, bad } = this.state;
     return (
       <Container>
         <SectionTitle title={'Please leave feedback'}>
@@ -64,19 +67,19 @@ export class App extends React.Component {
             onGoodClick={this.handleGoodClick}
             onNeutralClick={this.handleNeutralClick}
             onBadClick={this.handleBadClick}
-          ></FeedbackOptions>
+          />
         </SectionTitle>
         <SectionTitle title={'Statistics'}>
-          {!this.state.good && !this.state.neutral && !this.state.bad ? (
-            <NotificationMessage></NotificationMessage>
+          {!good && !neutral && !bad ? (
+            <NotificationMessage/>
           ) : (
             <Statictics
-              good={this.state.good}
-              neutral={this.state.neutral}
-              bad={this.state.bad}
+              good={good}
+              neutral={neutral}
+              bad={bad}
               total={this.countTotalFeedback()}
               positivePercentage={this.countPositiveFeedbackPercentage()}
-            ></Statictics>
+            />
           )}
         </SectionTitle>
       </Container>
