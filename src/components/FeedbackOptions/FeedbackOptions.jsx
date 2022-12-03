@@ -2,18 +2,16 @@ import React from 'react';
 import { Button, List } from './FeedbackOptions.styled';
 
 export const FeedbackOptions = ({
-  onGoodClick,
-  onNeutralClick,
-  onBadClick,
+  onClick
 }) => (
-  <List className="feedback-list">
-    <Button className="feedback-button" type="button" onClick={onGoodClick}>
+  <List>
+    <Button type="button" name="good" onClick={onClick}>
       Good
     </Button>
-    <Button className="feedback-button" type="button" onClick={onNeutralClick}>
+    <Button type="button" name="neutral" onClick={onClick}>
       Neutral
     </Button>
-    <Button className="feedback-button" type="button" onClick={onBadClick}>
+    <Button type="button" name="bad" onClick={onClick}>
       Bad
     </Button>
   </List>

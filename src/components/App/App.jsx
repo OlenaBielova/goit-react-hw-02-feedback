@@ -8,9 +8,7 @@ import { Container } from './App.styled';
 
 export class App extends React.Component {
   static propTypes = {
-    onGoodClick: PropTypes.func,
-    onNeutralClick: PropTypes.func,
-    onBadClick: PropTypes.func,
+    onClick: PropTypes.func,
     good: PropTypes.number,
     neutral: PropTypes.number,
     bad: PropTypes.number,
@@ -24,24 +22,12 @@ export class App extends React.Component {
     neutral: 0,
     bad: 0,
   };
-
-  handleGoodClick = () => {
+  
+  handleClick = (e) =>{
     this.setState(prevState => ({
-      good: prevState.good + 1,
+      [e.target.name]: prevState[e.target.name] + 1,
     }));
-  };
-
-  handleNeutralClick = () => {
-    this.setState(prevState => ({
-      neutral: prevState.neutral + 1,
-    }));
-  };
-
-  handleBadClick = () => {
-    this.setState(prevState => ({
-      bad: prevState.bad + 1,
-    }));
-  };
+  }
 
   countTotalFeedback = () => {
     const { good, neutral, bad } = this.state;
@@ -64,9 +50,7 @@ export class App extends React.Component {
       <Container>
         <SectionTitle title={'Please leave feedback'}>
           <FeedbackOptions
-            onGoodClick={this.handleGoodClick}
-            onNeutralClick={this.handleNeutralClick}
-            onBadClick={this.handleBadClick}
+            onClick={this.handleClick}
           />
         </SectionTitle>
         <SectionTitle title={'Statistics'}>
